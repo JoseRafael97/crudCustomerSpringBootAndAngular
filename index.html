@@ -1,0 +1,31 @@
+<html ng-app="listOfActivitiesAndEvents">
+<head>
+	
+	<title>Lista de atividades</title>
+	<link rel="stylesheet" type="text/css" href="lib/vendors/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="lib/css/style.css">
+
+	<script src="lib/vendors/angular/angular.min.js"></script>
+
+	<script>
+		
+		angular.module("listOfActivitiesAndEvents", []);
+
+		angular.module("listOfActivitiesAndEvents").controller("listOfActivitiesCrtl", function($scope){
+			$scope.app = "Lista de atividades"
+
+		});
+
+	</script>
+</head>
+
+<body ng-controller = "listOfActivitiesCrtl">
+
+</body>
+
+	<div class="jumbotron">
+		
+		<h4 ng-bind = "app"></h4>
+	</div>
+
+</html>
