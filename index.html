@@ -12,7 +12,27 @@
 		angular.module("listOfActivitiesAndEvents", []);
 
 		angular.module("listOfActivitiesAndEvents").controller("listOfActivitiesCrtl", function($scope){
+			
 			$scope.app = "Lista de atividades"
+
+			$scope.activities = [
+				{name : "Estudar angular js", description: "Inciar o aprendizado no framework angular js versão 1", initialDate : "02/01/2017 16:00", endDate :"02/01/2017 17:00"},
+				
+				{name : "Estudar Spring boot", description: "Inciar o aprendizado para de uma Api Restful com Spring boot versão 2.x", initialDate : "03/01/2017 16:00", endDate : "03/01/2017 17:00"},
+				
+				{name : "Estudar laravel e php", description: "Inciar o aprendizado no framework laravel versão 5.3", initialDate : "04/01/2017 16:00", endDate : "04/01/2017 17:00"}
+			];
+
+			$scope.categories = [
+				{name:"Estudo"},
+				{name: "Trabalho"},
+				{name: "Atividade física"}
+			];
+
+			$scope.addActivity = function(activity){
+				$scope.activities.push(angular.copy(activity));
+				delete $scope.activity;
+			}
 
 		});
 
@@ -26,6 +46,52 @@
 	<div class="jumbotron">
 		
 		<h4 ng-bind = "app"></h4>
+
+		<table class="table table-striped table-hover  table-condensed">
+			<tr>
+				<th>Nome</th>
+				<th>Descrição</th>
+				<th>Data de Início</th>
+				<th>Data de fim</th>
+				<th>Category</th>
+
+			</tr>
+			<tr ng-repeat="activity in activities">
+				<td>{{activity.name}}</td>
+				<td>{{activity.description}}</td>
+				<td>{{activity.initialDate}}</td>
+				<td>{{activity.endDate}}</td>
+				<td>{{activity.category.name}}</td>
+			</tr>
+		</table>
+
+		<hr>
+		<div class="form-group row">
+			<input placeholder="Nome da atividade" type="text" class="form-control" ng-model="activity.name">
+		</div>
+
+		<div class="form-group row">
+			<textarea placeholder="Descrição" class="form-control" rows="3" ng-model="activity.description"></textarea>	
+		</div>
+		
+		<div class="form-group row">
+			<input type="text" placeholder="Data de início Ex: 23/03/2014 15:00" class="form-control" ng-model="activity.initialDate">
+		</div>
+
+		<div class="form-group row">
+			<input type="text" placeholder="Data de Fim Ex: 23/03/2014 18:00" class="form-control" ng-model="activity.endDate">
+
+		</div>
+		<div class="form-group row">
+			<select class="form-control" ng-model="activity.category" ng-options="category.name for category in categories">
+				<option>Selecione uma categoria</option>
+			</select>
+
+		</div>
+		<div class="form-group row">
+			<button class="btn btn-primary btn-block" ng-click="addActivity(activity)" ng-disabled="!activity.name || !activity.initialDate || !activity.endDate" >Adicionar Atividade</button>
+		</div>
+
 	</div>
 
 </html>
