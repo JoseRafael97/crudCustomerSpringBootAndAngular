@@ -16,11 +16,11 @@
 			$scope.app = "Lista de atividades"
 
 			$scope.activities = [
-				{name : "Estudar angular js", description: "Inciar o aprendizado no framework angular js versão 1", initialDate : "02/01/2017 16:00", endDate :"02/01/2017 17:00"},
+				{name : "Estudar angular", description: "Inciar o aprendizado no framework angular js versão 1", initialDate : "02/01/2017 16:00", endDate :"02/01/2017 17:00", category:{name: "Estudo"}},
 				
-				{name : "Estudar Spring boot", description: "Inciar o aprendizado para de uma Api Restful com Spring boot versão 2.x", initialDate : "03/01/2017 16:00", endDate : "03/01/2017 17:00"},
+				{name : "Estudar Spring", description: "Inciar o aprendizado para de uma Api Restful com Spring boot versão 2.x", initialDate : "03/01/2017 16:00", endDate : "03/01/2017 17:00", category:{name: "Estudo"}}, 
 				
-				{name : "Estudar laravel e php", description: "Inciar o aprendizado no framework laravel versão 5.3", initialDate : "04/01/2017 16:00", endDate : "04/01/2017 17:00"}
+				{name : "Estudar Laravel", description: "Inciar o aprendizado no framework laravel versão 5.3", initialDate : "04/01/2017 16:00", endDate : "04/01/2017 17:00",  category:{name: "Estudo"}}
 			];
 
 			$scope.categories = [
@@ -34,6 +34,19 @@
 				delete $scope.activity;
 			}
 
+			$scope.removeActivity = function(activities){
+				$scope.activities = activities.filter(function(activity){
+					if(!activity.selected) return activity;
+				});
+			}
+
+
+			$scope.isSelectedActivity = function(activities){
+				return isSelectedActivity = activities.some(function(activity){
+					return activity.selected;
+				});
+
+			}
 		});
 
 	</script>
@@ -44,21 +57,20 @@
 </body>
 
 	<div class="jumbotron">
-		
 		<h4 ng-bind = "app"></h4>
-
-		<table class="table table-striped table-hover  table-condensed">
+		<table class="table table-striped">
 			<tr>
+				<th></th>
 				<th>Nome</th>
-				<th>Descrição</th>
 				<th>Data de Início</th>
 				<th>Data de fim</th>
 				<th>Category</th>
 
 			</tr>
-			<tr ng-repeat="activity in activities">
+			<tr ng-class="{selected : activity.selected}" ng-repeat="activity in activities">
+
+				<td><input type="checkbox" ng-model="activity.selected"></td>
 				<td>{{activity.name}}</td>
-				<td>{{activity.description}}</td>
 				<td>{{activity.initialDate}}</td>
 				<td>{{activity.endDate}}</td>
 				<td>{{activity.category.name}}</td>
@@ -89,7 +101,11 @@
 
 		</div>
 		<div class="form-group row">
-			<button class="btn btn-primary btn-block" ng-click="addActivity(activity)" ng-disabled="!activity.name || !activity.initialDate || !activity.endDate" >Adicionar Atividade</button>
+			<button class="btn btn-primary btn-block" ng-click="addActivity(activity)" ng-disabled="!activity.name || !activity.initialDate || !activity.endDate" >ADICIONAR ATIVIDADE</button>
+		</div>
+
+		<div class="form-group row">
+			<button class="btn btn-danger btn-block" ng-click="removeActivity(activities)"  ng-disabled="!isSelectedActivity(activities)">REMOVER ATIVIDADES</button>
 		</div>
 
 	</div>
