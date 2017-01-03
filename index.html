@@ -3,6 +3,7 @@
 	<meta charset="UTF-8">			
 	<title>Lista de atividades</title>
 	<link rel="stylesheet" type="text/css" href="lib/vendors/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="lib/vendors/font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="lib/css/style.css">
 
 	<script src="lib/vendors/angular/angular.min.js"></script>
@@ -17,11 +18,11 @@
 			$scope.app = "Lista de atividades"
 
 			$scope.activities = [
-				{name : "Estudar angular", description: "Inciar o aprendizado no framework angular js versão 1", initialDate : "02/01/2017 16:00", endDate :"02/01/2017 17:00", category:{name: "Estudo"}},
+				{name : "Estudar angular", description: "Inciar o aprendizado no framework angular js versão 1", initialDate : new Date(), endDate :new Date(), category:{name: "Estudo"}},
 				
-				{name : "Estudar Spring", description: "Inciar o aprendizado para de uma Api Restful com Spring boot versão 2.x", initialDate : "03/01/2017 16:00", endDate : "03/01/2017 17:00", category:{name: "Estudo"}}, 
+				{name : "Estudar Spring", description: "Inciar o aprendizado para de uma Api Restful com Spring boot versão 2.x", initialDate : new Date(), endDate :new Date(), category:{name: "Estudo"}}, 
 				
-				{name : "Estudar Laravel", description: "Inciar o aprendizado no framework laravel versão 5.3", initialDate : "04/01/2017 16:00", endDate : "04/01/2017 17:00",  category:{name: "Estudo"}}
+				{name : "Estudar Laravel", description: "Inciar o aprendizado no framework laravel versão 5.3", initialDate : new Date(), endDate : new Date(),  category:{name: "Trabalho"}}
 			];
 
 			$scope.categories = [
@@ -49,6 +50,11 @@
 				});
 
 			}
+
+			$scope.orderByActivities = function(field){
+				$scope.orderTo = field;
+				$scope.orderDirection = !$scope.orderDirection;
+			}
 		});
 
 	</script>
@@ -58,22 +64,28 @@
 
 	<div class="jumbotron">
 		<h4 ng-bind = "app"></h4>
+
+		<input type="text" class="form-control" ng-model="seachActivity" placeholder="Digite para buscar.">
+
 		<table ng-show="activities.length > 0" class="table table-striped">
 			<tr>
 				<th></th>
-				<th>Nome</th>
-				<th>Data de Início</th>
-				<th>Data de fim</th>
-				<th>Categoria</th>
+				<th><a href="#" ng-click="orderByActivities('name')"><i style="padding-left: 5px" class="fa fa-sort" aria-hidden="true"></i>Nome</a></th>
+				
+				<th><a href="#" ng-click="orderByActivities('initialDate')"><i style="padding-left: 5px" class="fa fa-sort" aria-hidden="true"></i>Data de Início</a></th>
+				
+				<th><a href="#" ng-click="orderByActivities('endDate')"><i style="padding-left: 5px" class="fa fa-sort" aria-hidden="true"></i>Data de fim</a></th>
+				
+				<th><a href="#" ng-click="orderByActivities(category.name)"><i style="padding-left: 5px" class="fa fa-sort" aria-hidden="true"></i>Categoria</a></th>
 
 			</tr>
-			<tr ng-class="{selected : activity.selected}" ng-repeat="activity in activities">
+			<tr ng-class="{selected : activity.selected}" ng-repeat="activity in activities | filter:seachActivity | orderBy:orderTo:orderDirection">
 
 				<td><input type="checkbox" ng-model="activity.selected"></td>
-				<td>{{activity.name}}</td>
-				<td>{{activity.initialDate}}</td>
-				<td>{{activity.endDate}}</td>
-				<td>{{activity.category.name}}</td>
+				<td>{{activity.name | uppercase}}</td>
+				<td>{{activity.initialDate | date:'dd/MM/yyyy HH:mm'}}</td>
+				<td>{{activity.endDate | date:'dd/MM/yyyy HH:mm'}}</td>
+				<td>{{activity.category.name | lowercase}}</td>
 			</tr>
 		</table>
 
@@ -120,7 +132,7 @@
 
 			</div>
 			<div class="form-group row">
-				<select class="form-control" ng-model="activity.category" ng-options="category.name for category in categories" ng-required="true">
+				<select class="form-control" ng-model="activity.category" ng-options="category.name for category in categories | orderBy:'name'" ng-required="true">
 					<option value="">Selecione uma categoria</option>
 				</select>
 
