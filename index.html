@@ -1,15 +1,16 @@
 <html ng-app="listOfActivitiesAndEvents">
 <head>
-	
+	<meta charset="UTF-8">			
 	<title>Lista de atividades</title>
 	<link rel="stylesheet" type="text/css" href="lib/vendors/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="lib/css/style.css">
 
 	<script src="lib/vendors/angular/angular.min.js"></script>
+	<script src="lib/vendors/angular/angular-messages.min.js"></script>
 
 	<script>
 		
-		angular.module("listOfActivitiesAndEvents", []);
+		angular.module("listOfActivitiesAndEvents", ["ngMessages"]);
 
 		angular.module("listOfActivitiesAndEvents").controller("listOfActivitiesCrtl", function($scope){
 			
@@ -32,6 +33,7 @@
 			$scope.addActivity = function(activity){
 				$scope.activities.push(angular.copy(activity));
 				delete $scope.activity;
+				$scope.activityForm.setPristine();
 			}
 
 			$scope.removeActivity = function(activities){
@@ -53,8 +55,6 @@
 </head>
 
 <body ng-controller = "listOfActivitiesCrtl">
-
-</body>
 
 	<div class="jumbotron">
 		<h4 ng-bind = "app"></h4>
@@ -78,30 +78,58 @@
 		</table>
 
 		<hr>
-		<div class="form-group row">
-			<input placeholder="Nome da atividade" type="text" class="form-control" ng-model="activity.name">
-		</div>
+ 
+		<div id="idMessages" class="alert  alert-danger  alert-dismissible" role="alert" ng-messages="activityForm.name.$error">
+           
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            	<span aria-hidden="true">&times;</span>
+            </button>
+            
+            <div ng-message="required">
+            	<i class="fa  fa-exclamation-circle"></i> O campo nome é obrigatório.
+            </div>
+
+            <div ng-message="length">
+            	<i  class="fa  fa-exclamation-circle"></i> O campo nome deve conter no mínimo 10 caracteres.
+            </div>
+
+        </div>
+
+
+     
+         <div id="idMessages" class="alert  alert-danger  alert-dismissible" role="alert" ng-show="activityForm.initialDate.$error.pattern">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <i class="fa  fa-exclamation-circle"></i> O campo data inicial deve deve estar no formato dd/m/yyyy h:m.
+        </div>
+
+		<form name="activityForm">
+			<div class="form-group row">
+				<input placeholder="Nome da atividade" name="name" type="text" class="form-control" ng-model="activity.name" ng-required="true" ng-minlength="10">
+			</div>
+
+			<div class="form-group row">
+				<textarea placeholder="Descrição" name="description" class="form-control" rows="3" ng-model="activity.description"></textarea>	
+			</div>
+			
+			<div class="form-group row">
+				<input type="text" name="initialDate" placeholder="Data de início Ex: 23/03/2014 15:00" class="form-control" ng-model="activity.initialDate" ng-required="true" ng-pattern="/^\d{2}/\d{2}/\d{4} \d{2}:\d{2}$/">
+			</div>
+
+			<div class="form-group row">
+				<input type="text" name="endDate" placeholder="Data de Fim Ex: 23/03/2014 18:00" class="form-control" ng-model="activity.endDate" ng-required="true">
+
+			</div>
+			<div class="form-group row">
+				<select class="form-control" ng-model="activity.category" ng-options="category.name for category in categories" ng-required="true">
+					<option value="">Selecione uma categoria</option>
+				</select>
+
+			</div>
+
+		</form>
 
 		<div class="form-group row">
-			<textarea placeholder="Descrição" class="form-control" rows="3" ng-model="activity.description"></textarea>	
-		</div>
-		
-		<div class="form-group row">
-			<input type="text" placeholder="Data de início Ex: 23/03/2014 15:00" class="form-control" ng-model="activity.initialDate">
-		</div>
-
-		<div class="form-group row">
-			<input type="text" placeholder="Data de Fim Ex: 23/03/2014 18:00" class="form-control" ng-model="activity.endDate">
-
-		</div>
-		<div class="form-group row">
-			<select class="form-control" ng-model="activity.category" ng-options="category.name for category in categories">
-				<option value="">Selecione uma categoria</option>
-			</select>
-
-		</div>
-		<div class="form-group row">
-			<button class="btn btn-primary btn-block" ng-click="addActivity(activity)" ng-disabled="!activity.name || !activity.initialDate || !activity.endDate || !activity.category.name" >ADICIONAR ATIVIDADE</button>
+			<button class="btn btn-primary btn-block" ng-click="addActivity(activity)" ng-disabled="activityForm.$invalid" >ADICIONAR ATIVIDADE</button>
 		</div>
 
 		<div class="form-group row">
@@ -109,5 +137,10 @@
 		</div>
 
 	</div>
+	<script type="text/javascript" src="lib/vendors/jquery/jquery-3.1.1.min.js"></script>
+	<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+	<script type="text/javascript" src="lib/vendors/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
 
 </html>
