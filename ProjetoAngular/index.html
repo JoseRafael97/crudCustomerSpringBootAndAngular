@@ -1,0 +1,161 @@
+<html ng-app="crudCustomer">
+<head>
+	<meta charset="UTF-8">			
+	<title>Lista de atividades</title>
+	<link rel="stylesheet" type="text/css" href="lib/vendors/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="lib/vendors/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="lib/css/style.css">
+
+	<script src="lib/vendors/angular/angular.min.js"></script>
+	<script src="lib/vendors/angular/angular-messages.min.js"></script>
+
+	<script>
+		
+		angular.module("crudCustomer", ["ngMessages"]);
+
+		angular.module("crudCustomer").controller("customerController", function($scope, $http){
+			
+			$scope.app = "Lista de Clientes"
+
+			$scope.customers = [];
+			
+			var loadingCustomers = function(){
+				$http.get("http://localhost:8080/customer").success(function(data){
+					console.log(data);
+					//$scope.customers = data;
+				});
+			}
+
+			$scope.addCustomer = function(customer){
+				customer.dateOfBirth = new Date();
+				$http.post("http://localhost:8080/customer", customer).success(function(data){
+					delete $scope.customer;
+					$scope.customerForm.setPristine();
+					loadingCustomers();
+				});
+				
+			}
+
+			$scope.removeCustomer = function(customers){
+				$scope.customers = customers.filter(function(customer){
+					if(!customer.selected) return customer;
+				});
+			}
+
+
+			$scope.isSelectedCustomer = function(customers){
+				return isSelectedCustomer = customers.some(function(customer){
+					return customer.selected;
+				});
+
+			}
+
+			$scope.orderByCustomers = function(field){
+				$scope.orderTo = field;
+				$scope.orderDirection = !$scope.orderDirection;
+			}
+
+			loadingCustomers();
+		});
+
+	</script>
+</head>
+
+<body ng-controller = "customerController">
+
+	<div class="jumbotron">
+		<h4 ng-bind = "app"></h4>
+
+		<input type="text" class="form-control" ng-model="seachCustomer" placeholder="Digite para buscar.">
+
+		<table ng-show="customers.length > 0" class="table table-striped">
+			<tr>
+				<th></th>
+				<th><a href="#" ng-click="orderByCustomers('name')"><i style="padding-left: 5px" class="fa fa-sort" aria-hidden="true"></i>Nome</a></th>
+				
+				<th><a href="#" ng-click="orderByCustomers('initialDate')"><i style="padding-left: 5px" class="fa fa-sort" aria-hidden="true"></i>CPF</a></th>
+				
+				<th><a href="#" ng-click="orderByCustomers('endDate')"><i style="padding-left: 5px" class="fa fa-sort" aria-hidden="true"></i>Data de Nascimento</a></th>
+
+				<th><a href="#" ng-click="orderByCustomers('endDate')"><i style="padding-left: 5px" class="fa fa-sort" aria-hidden="true"></i>Email</a></th>
+				
+
+				<th><a href="#" ng-click="orderByCustomers('endDate')"><i style="padding-left: 5px" class="fa fa-sort" aria-hidden="true"></i>Telefone</a></th>
+				
+				
+
+			</tr>
+			<tr ng-class="{selected : customer.selected}" ng-repeat="customer in customers | filter:seachCustomer | orderBy:orderTo:orderDirection">
+
+				<td><input type="checkbox" ng-model="customer.selected"></td>
+				<td>{{customer.name | uppercase}}</td>
+				<td>{{customer.cpf }}</td>
+				<td>{{customer.dateOfBirth | date:'dd/MM/yyyy HH:mm'}}</td>
+				<td>{{customer.email | lowercase}}</td>
+				<td>{{customer.phone}}</td>
+
+			</tr>
+		</table>
+
+		<hr>
+ 
+		<div id="idMessages" class="alert  alert-danger  alert-dismissible" role="alert" ng-messages="customerForm.name.$error">
+           
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            	<span aria-hidden="true">&times;</span>
+            </button>
+            
+            <div ng-message="required">
+            	<i class="fa  fa-exclamation-circle"></i> O campo nome é obrigatório.
+            </div>
+
+            <div ng-message="length">
+            	<i  class="fa  fa-exclamation-circle"></i> O campo nome deve conter no mínimo 10 caracteres.
+            </div>
+
+        </div>
+
+
+  
+		<form name="customerForm">
+			
+			<div class="form-group row">
+				<input placeholder="Nome do Cliente" name="name" type="text" class="form-control" ng-model="customer.name" ng-required="true" ng-minlength="10">
+			</div>
+
+			<div class="form-group row">
+				<input placeholder="CPF" name="cpf" type="text" class="form-control" ng-model="customer.cpf" ng-required="true">
+			</div>
+			
+			<div class="form-group row">
+				<input type="text" name="dateOfBirth" placeholder="Data de Nascimento" class="form-control" ng-model="customer.dateOfBirth" ng-required="true" >
+			</div>
+
+			<div class="form-group row">
+				<input type="text" name="email" placeholder="E-mail" class="form-control" ng-model="customer.email" ng-required="true">
+
+			</div>
+
+			<div class="form-group row">
+				<input type="text" name="phone" placeholder="Telefone" class="form-control" ng-model="customer.phone" ng-required="true">
+
+			</div>
+			
+		</form>
+
+		<div class="form-group row">
+			<button class="btn btn-primary btn-block" ng-click="addCustomer(customer)" ng-disabled="customerForm.$invalid" >ADICIONAR ATIVIDADE</button>
+		</div>
+
+		<div class="form-group row">
+			<button class="btn btn-danger btn-block" ng-click="removeCustomer(customers)"  ng-show="isSelectedCustomer(customers)">REMOVER ATIVIDADES</button>
+		</div>
+
+	</div>
+	<script type="text/javascript" src="lib/vendors/jquery/jquery-3.1.1.min.js"></script>
+	<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+	<script type="text/javascript" src="lib/vendors/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
