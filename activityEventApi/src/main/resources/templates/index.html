@@ -1,14 +1,27 @@
-<html ng-app="crudCustomer">
+<!DOCTYPE html>
+<html lang="en" ng-app="crudCustomer">
+
+
 <head>
+
+<meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
 
-<!-- Custom CSS -->
-<meta charset="UTF-8" />
 <title>Clientes</title>
 
-<link rel="stylesheet" type="text/css"
-	href="/vendors/bootstrap/css/bootstrap.min.css" />
+<!-- Bootstrap Core CSS -->
+<link href="/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Custom CSS -->
+<style>
+body {
+	padding-top: 70px;
+	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+</style>
 
 <link rel="stylesheet" type="text/css"
 	href="/vendors/font-awesome-4.7.0/css/font-awesome.min.css" />
@@ -18,43 +31,45 @@
 <script src="/vendors/angular/angular.min.js"></script>
 <script src="/vendors/angular/angular-messages.min.js"></script>
 
-
-
 <script src="/js/app.js"></script>
+
 </head>
 
 <body ng-controller="customerController">
 
-	<div class="container-fluid">
+	<div ng-include="'/view/fragments/navbar.html'"></div>
+	<!-- Page Content -->
+	<div class="container">
 
 		<h4 ng-bind="app"></h4>
 
-		<input type="text" class="form-control" ng-model="seachCustomer"
-					placeholder="Digite para buscar." />
 
-		<table ng-show="customers.length > 0" class="table table-striped">
+		<input type="text" class="form-control" ng-model="seachCustomer"
+			placeholder="Digite para buscar." />
+
+		<div ng-show="customers.length > 0" class="table-responsive">
+			<table id="tabela-jqueyDataTable"
+				class="table  table-striped table-hover  table-condensed ">
+
+				<thead class="aw-table-header-solid">
 					<tr>
 						<th></th>
-						<th><a href="#" ng-click="orderByCustomers('name')"><i
-								style="padding-left: 5px" class="fa fa-sort" aria-hidden="true"></i>Nome</a></th>
+						<th><a href="#" ng-click="orderByCustomers('name')">Nome</a></th>
 
-						<th><a href="#" ng-click="orderByCustomers('initialDate')"><i
-								style="padding-left: 5px" class="fa fa-sort" aria-hidden="true"></i>CPF</a></th>
+						<th><a href="#" ng-click="orderByCustomers('initialDate')">CPF</a></th>
 
-						<th><a href="#" ng-click="orderByCustomers('endDate')"><i
-								style="padding-left: 5px" class="fa fa-sort" aria-hidden="true"></i>Data
-								de Nascimento</a></th>
+						<th><a href="#" ng-click="orderByCustomers('endDate')">Data de Nasc.</a></th>
 
-						<th><a href="#" ng-click="orderByCustomers('endDate')"><i
-								style="padding-left: 5px" class="fa fa-sort" aria-hidden="true"></i>Email</a></th>
+						<th><a href="#" ng-click="orderByCustomers('endDate')">Email</a></th>
 
 
-						<th><a href="#" ng-click="orderByCustomers('endDate')"><i
-								style="padding-left: 5px" class="fa fa-sort" aria-hidden="true"></i>Telefone</a></th>
+						<th><a href="#" ng-click="orderByCustomers('endDate')">Telefone</a></th>
 
 
 
 					</tr>
+				</thead>
+				<tbody id="tb-clientes-data">
 					<tr ng-class="{selected : customer.selected}"
 						ng-repeat="customer in customers | filter:seachCustomer | orderBy:orderTo:orderDirection">
 
@@ -66,98 +81,65 @@
 						<td>{{customer.phone}}</td>
 
 					</tr>
-				</table>
+				</tbody>
+			</table>
+		</div>
 
-				<hr />
+		<hr />
 
-				<div id="idMessages" class="alert  alert-danger  alert-dismissible"
-					role="alert" ng-messages="customerForm.name.$error">
+		<form name="customerForm">
 
-					<button type="button" class="close" data-dismiss="alert"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
+			<div class="form-group row">
+				<input placeholder="Nome do Cliente" name="name" type="text"
+					class="form-control" ng-model="customer.name" ng-required="true"
+					ng-minlength="10" />
+			</div>
 
-					<div ng-message="required">
-						<i class="fa  fa-exclamation-circle"></i> O campo nome é
-						obrigatório.
-					</div>
+			<div class="form-group row">
+				<input placeholder="CPF" name="cpf" type="text" class="form-control"
+					ng-model="customer.cpf" ng-required="true" />
+			</div>
 
-					<div ng-message="length">
-						<i class="fa  fa-exclamation-circle"></i> O campo nome deve conter
-						no mínimo 10 caracteres.
-					</div>
+			<div class="form-group row">
+				<input type="text" name="dateOfBirth"
+					placeholder="Data de Nascimento" class="form-control"
+					ng-model="customer.dateOfBirth" ng-required="true" />
+			</div>
 
-				</div>
+			<div class="form-group row">
+				<input type="text" name="email" placeholder="E-mail"
+					class="form-control" ng-model="customer.email" ng-required="true" />
 
+			</div>
 
+			<div class="form-group row">
+				<input type="text" name="phone" placeholder="Telefone"
+					class="form-control" ng-model="customer.phone" ng-required="true" />
 
-				<form name="customerForm">
+			</div>
 
-					<div class="form-group row">
-						<input placeholder="Nome do Cliente" name="name" type="text"
-							class="form-control" ng-model="customer.name" ng-required="true"
-							ng-minlength="10" />
-					</div>
+		</form>
 
-					<div class="form-group row">
-						<input placeholder="CPF" name="cpf" type="text"
-							class="form-control" ng-model="customer.cpf" ng-required="true" />
-					</div>
+		<div class="form-group row">
+			<button class="btn btn-primary btn-block"
+				ng-click="addCustomer(customer)" ng-disabled="customerForm.$invalid">ADICIONAR
+				CLIENTE</button>
+		</div>
 
-					<div class="form-group row">
-						<input type="text" name="dateOfBirth"
-							placeholder="Data de Nascimento" class="form-control"
-							ng-model="customer.dateOfBirth" ng-required="true" />
-					</div>
+		<div class="form-group row">
+			<button class="btn btn-danger btn-block"
+				ng-click="removeCustomer(customers)"
+				ng-show="isSelectedCustomer(customers)">REMOVER CLIENTES</button>
+		</div>
 
-					<div class="form-group row">
-						<input type="text" name="email" placeholder="E-mail"
-							class="form-control" ng-model="customer.email" ng-required="true" />
-
-					</div>
-
-					<div class="form-group row">
-						<input type="text" name="phone" placeholder="Telefone"
-							class="form-control" ng-model="customer.phone" ng-required="true" />
-
-					</div>
-
-				</form>
-
-				<div class="form-group row">
-					<button class="btn btn-primary btn-block"
-						ng-click="addCustomer(customer)"
-						ng-disabled="customerForm.$invalid">ADICIONAR ATIVIDADE</button>
-				</div>
-
-				<div class="form-group row">
-					<button class="btn btn-danger btn-block"
-						ng-click="removeCustomer(customers)"
-						ng-show="isSelectedCustomer(customers)">REMOVER
-						ATIVIDADES</button>
-				</div>
-			
 	</div>
-	<!-- /#page-content-wrapper -->
+	<!-- /.container -->
 
+	<!-- jQuery Version 1.11.1 -->
+	<script src="/vendors/jquery/jquery-3.1.1.min.js"></script>
 
-
-	<script type="text/javascript"
-		src="/vendors/jquery/jquery-3.1.1.min.js"></script>
 	<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-	<script type="text/javascript"
-		src="/vendors/bootstrap/js/bootstrap.min.js"></script>
-		
-		<!-- Menu Toggle Script -->
-    <script>
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-    </script>
-		
-
+	<!-- Bootstrap Core JavaScript -->
+	<script src="/vendors/bootstrap/js/bootstrap.min.js"></script>
 </body>
-
 </html>
