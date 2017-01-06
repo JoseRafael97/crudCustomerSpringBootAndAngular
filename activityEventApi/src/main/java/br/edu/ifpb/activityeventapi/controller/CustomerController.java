@@ -50,5 +50,12 @@ public class CustomerController {
 
 		return new ResponseEntity<List<Customer>>(customers, HttpStatus.OK);
 	}
+	
+	@RequestMapping(method = RequestMethod.DELETE, value= BASE_URI+"/{id}")
+	public void removeCustomer(@PathVariable Long id){
+
+		service.removeCustomer(id); 
+	}
+	
 
 }

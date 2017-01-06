@@ -32,9 +32,16 @@ angular.module("crudCustomer").controller(
 			}
 
 			$scope.removeCustomer = function(customers) {
-				$scope.customers = customers.filter(function(customer) {
-					if (!customer.selected)
-						return customer;
+				customers.filter(function(customer) {
+					if (customer.selected){
+						
+						customersAPI.deleteCustomer(customer.id).then(function onSucces(response) {
+							$scope.loadingCustomers();
+						
+						}, function onError(response) {
+						
+						});
+					}
 				});
 			}
 

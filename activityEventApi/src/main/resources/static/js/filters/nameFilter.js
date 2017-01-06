@@ -4,7 +4,6 @@ angular.module("crudCustomer").filter("name", function(){
 		var formatedNamesList = listNames.map(function(name){
 			return name.charAt(0).toUpperCase()+name.substring(1).toLowerCase();
 		});
-		console.log(formatedNamesList);
 		return formatedNamesList.join(" ");
 	}
 });

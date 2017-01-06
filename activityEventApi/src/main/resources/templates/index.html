@@ -49,6 +49,7 @@
 				<thead class="aw-table-header-solid">
 					<tr>
 						<th></th>
+						<th>#</th>
 						<th><a href="#" ng-click="orderByCustomers('name')">Nome</a></th>
 
 						<th><a href="#" ng-click="orderByCustomers('initialDate')">CPF</a></th>
@@ -69,6 +70,7 @@
 						ng-repeat="customer in customers | filter:seachCustomer | orderBy:orderTo:orderDirection">
 
 						<td><input type="checkbox" ng-model="customer.selected" /></td>
+						<td>{{customer.id}}</td>
 						<td>{{customer.name | name}}</td>
 						<td>{{customer.cpf }}</td>
 						<td>{{customer.dateOfBirth | date:'dd/MM/yyyy HH:mm'}}</td>
