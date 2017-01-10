@@ -4,7 +4,7 @@ angular.module("crudCustomer").directive("uiCpf", function(){
 		link: function(scope, element, attrs, crtl){
 			
 		
-			var _fomartCpf = function(phone){
+			var _fomartCpf = function(cpf){
 				
 				cpf = cpf.replace(/[^0-9]+/g,"");
 
@@ -19,7 +19,7 @@ angular.module("crudCustomer").directive("uiCpf", function(){
 	
 				if(cpf.length>11){
 					
-					cpf = cpf.substring(0,11)+"."+cpf.substring(11);
+					cpf = cpf.substring(0,11)+"-"+cpf.substring(11,13);
 				}
 				
 				return cpf;
@@ -32,7 +32,7 @@ angular.module("crudCustomer").directive("uiCpf", function(){
 			});
 			
 			crtl.$parsers.push(function(value){
-				if(value.length === 15){
+				if(value.length === 14){
 					return value;
 				}
 			})
