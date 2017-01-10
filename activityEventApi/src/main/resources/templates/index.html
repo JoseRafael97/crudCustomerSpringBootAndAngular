@@ -28,6 +28,9 @@
 <script src="/js/value/configValue.js"></script>
 <script src="/js/filters/nameFilter.js"></script>
 <script src="/directives/sgest-datedirective.js"></script>
+<script src="/directives/sgest-phonedirective.js"></script>
+<script src="/directives/sgest-cpfdirective.js"></script>
+
 
 </head>
 
@@ -95,7 +98,7 @@
 
 			<div class="form-group row">
 				<input placeholder="CPF" name="cpf" type="text" class="form-control"
-					ng-model="customer.cpf" ng-required="true" />
+					ng-model="customer.cpf" ng-required="true"  ui-cpf=""/>
 			</div>
 
 			<div class="form-group row">
@@ -112,7 +115,7 @@
 
 			<div class="form-group row">
 				<input type="text" name="phone" placeholder="Telefone"
-					class="form-control" ng-model="customer.phone" ng-required="true" />
+					class="form-control" ng-model="customer.phone" ng-required="true" ui-phone="" />
 
 			</div>
 
