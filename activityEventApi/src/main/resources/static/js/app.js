@@ -1,1 +1,1 @@
-angular.module("crudCustomer", ["ngMessages"]);
+angular.module("crudCustomer", ["ngMessages", "ngRoute"]);

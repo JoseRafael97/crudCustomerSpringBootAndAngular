@@ -2,7 +2,7 @@ angular.module("crudCustomer").controller(
 		"customerController",
 		function($scope, $http, customersAPI) {
 
-			$scope.app = "Lista de Clientes"
+			$scope.app = "List of Customers"
 
 			$scope.customers = [];
 

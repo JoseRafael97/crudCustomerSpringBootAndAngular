@@ -1,0 +1,69 @@
+
+<div class="page-header">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-10">
+				<h1 ng-bind="app"></h1>
+			</div>
+
+
+		</div>
+	</div>
+</div>
+
+<div class="panel-group row sm-col2">
+
+<input type="text" class="form-control" ng-model="seachCustomer"
+	placeholder="Search customer" />
+
+</div>
+
+<div ng-show="customers.length > 0" class="table-responsive">
+	<table class="table  table-striped table-hover  table-condensed ">
+
+		<thead class="aw-table-header-solid">
+			<tr>
+				<th></th>
+				<th>#</th>
+				<th><a href="#" ng-click="orderByCustomers('name')">Name</a></th>
+
+				<th><a href="#" ng-click="orderByCustomers('initialDate')">CPF</a></th>
+
+				<th><a href="#" ng-click="orderByCustomers('endDate')">Date of birth</a></th>
+
+				<th><a href="#" ng-click="orderByCustomers('endDate')">Email</a></th>
+
+
+				<th><a href="#" ng-click="orderByCustomers('endDate')">Phone</a></th>
+
+
+
+			</tr>
+		</thead>
+		<tbody id="tb-clientes-data">
+			<tr ng-class="{selected : customer.selected}"
+				ng-repeat="customer in customers | filter:seachCustomer | orderBy:orderTo:orderDirection">
+
+				<td><input type="checkbox" ng-model="customer.selected" /></td>
+				<td>{{customer.id}}</td>
+				<td>{{customer.name | name}}</td>
+				<td>{{customer.cpf }}</td>
+				<td>{{customer.dateOfBirth | date:'dd/MM/yyyy'}}</td>
+				<td>{{customer.email | lowercase}}</td>
+				<td>{{customer.phone}}</td>
+
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<hr />
+
+
+<div class="form-group row">
+	<button class="btn btn-danger btn-block"
+		ng-click="removeCustomer(customers)"
+		ng-show="isSelectedCustomer(customers)">REMOVER CLIENTES</button>
+</div>
+
+</div>

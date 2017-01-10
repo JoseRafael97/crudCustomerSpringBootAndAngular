@@ -10,131 +10,44 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 
-<title>Clientes</title>
+<title>Customer</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-<link rel="stylesheet" type="text/css" href="/vendors/font-awesome-4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="/vendors/font-awesome-4.7.0/css/font-awesome.min.css" />
+
 
 <link rel="stylesheet" type="text/css" href="/css/app.css" />
-
-<script src="/vendors/angular/angular.min.js"></script>
-<script src="/vendors/angular/angular-messages.min.js"></script>
-
-<script src="/js/app.js"></script>
-<script src="/js/controllers/customerController.js"></script>
-<script src="/js/services/customerAPIService.js"></script>
-<script src="/js/value/configValue.js"></script>
-<script src="/js/filters/nameFilter.js"></script>
-<script src="/directives/sgest-datedirective.js"></script>
-<script src="/directives/sgest-phonedirective.js"></script>
-<script src="/directives/sgest-cpfdirective.js"></script>
 
 
 </head>
 
-<body ng-controller="customerController">
+<body>
 
 	<div ng-include="'/view/fragments/navbar.html'"></div>
-	<!-- Page Content -->
+
 	<div class="container">
-
-		<h4 ng-bind="app"></h4>
-
-
-		<input type="text" class="form-control" ng-model="seachCustomer"
-			placeholder="Digite para buscar." />
-
-		<div ng-show="customers.length > 0" class="table-responsive">
-			<table id="tabela-jqueyDataTable"
-				class="table  table-striped table-hover  table-condensed ">
-
-				<thead class="aw-table-header-solid">
-					<tr>
-						<th></th>
-						<th>#</th>
-						<th><a href="#" ng-click="orderByCustomers('name')">Nome</a></th>
-
-						<th><a href="#" ng-click="orderByCustomers('initialDate')">CPF</a></th>
-
-						<th><a href="#" ng-click="orderByCustomers('endDate')">Data de Nasc.</a></th>
-
-						<th><a href="#" ng-click="orderByCustomers('endDate')">Email</a></th>
-
-
-						<th><a href="#" ng-click="orderByCustomers('endDate')">Telefone</a></th>
-
-
-
-					</tr>
-				</thead>
-				<tbody id="tb-clientes-data">
-					<tr ng-class="{selected : customer.selected}"
-						ng-repeat="customer in customers | filter:seachCustomer | orderBy:orderTo:orderDirection">
-
-						<td><input type="checkbox" ng-model="customer.selected" /></td>
-						<td>{{customer.id}}</td>
-						<td>{{customer.name | name}}</td>
-						<td>{{customer.cpf }}</td>
-						<td>{{customer.dateOfBirth | date:'dd/MM/yyyy'}}</td>
-						<td>{{customer.email | lowercase}}</td>
-						<td>{{customer.phone}}</td>
-
-					</tr>
-				</tbody>
-			</table>
-		</div>
-
-		<hr />
-
-		<form name="customerForm">
-
-			<div class="form-group row">
-				<input placeholder="Nome do Cliente" name="name" type="text"
-					class="form-control" ng-model="customer.name" ng-required="true"
-					ng-minlength="10" />
-			</div>
-
-			<div class="form-group row">
-				<input placeholder="CPF" name="cpf" type="text" class="form-control"
-					ng-model="customer.cpf" ng-required="true"  ui-cpf=""/>
-			</div>
-
-			<div class="form-group row">
-				<input type="text" name="date"
-					placeholder="Data de Nascimento" class="form-control"
-					ng-model="customer.dateOfBirth" ng-required="true"  ui-date="" />
-			</div>
-
-			<div class="form-group row">
-				<input type="text" name="email" placeholder="E-mail"
-					class="form-control" ng-model="customer.email" ng-required="true" />
-
-			</div>
-
-			<div class="form-group row">
-				<input type="text" name="phone" placeholder="Telefone"
-					class="form-control" ng-model="customer.phone" ng-required="true" ui-phone="" />
-
-			</div>
-
-		</form>
-
-		<div class="form-group row">
-			<button class="btn btn-primary btn-block"
-				ng-click="addCustomer(customer)" ng-disabled="customerForm.$invalid">ADICIONAR
-				CLIENTE</button>
-		</div>
-
-		<div class="form-group row">
-			<button class="btn btn-danger btn-block"
-				ng-click="removeCustomer(customers)"
-				ng-show="isSelectedCustomer(customers)">REMOVER CLIENTES</button>
-		</div>
+		<div ng-view="content"></div>
 
 	</div>
-	<!-- /.container -->
+
+
+	<script src="/vendors/angular/angular.min.js"></script>
+	<script src="/vendors/angular/angular-messages.min.js"></script>
+	<script src="/vendors/angular/angular-route.min.js"></script>
+
+	<script src="/js/app.js"></script>
+	<script src="/js/config/routeConfig.js"></script>
+	<script src="/js/controllers/customerController.js"></script>
+	<script src="/js/services/customerAPIService.js"></script>
+	<script src="/js/value/configValue.js"></script>
+	<script src="/js/filters/nameFilter.js"></script>
+	<script src="/directives/sgest-datedirective.js"></script>
+	<script src="/directives/sgest-phonedirective.js"></script>
+	<script src="/directives/sgest-cpfdirective.js"></script>
+
 
 	<!-- jQuery Version 1.11.1 -->
 	<script src="/vendors/jquery/jquery-3.1.1.min.js"></script>
