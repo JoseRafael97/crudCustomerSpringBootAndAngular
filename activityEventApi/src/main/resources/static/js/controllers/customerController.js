@@ -20,8 +20,6 @@ angular.module("crudCustomer").controller(
 			$scope.loadingCustomers();
 
 			$scope.addCustomer = function(customer) {
-				customer.dateOfBirth = new Date();
-
 				customersAPI.createCustomer(customer).then(
 						function onSucces(response) {
 							delete $scope.customer;

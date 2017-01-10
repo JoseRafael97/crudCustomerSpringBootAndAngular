@@ -25,6 +25,13 @@ angular.module("crudCustomer").directive("uiDate", function(){
 				crtl.$setViewValue(_fomartDate(crtl.$viewValue));
 				crtl.$render();
 			});
+			
+			crtl.$parsers.push(function(value){
+				if(value.length === 10){
+					var arrayDate = value.split("/");
+					return new Date(arrayDate[2], arrayDate[1]-1, arrayDate[0]);
+				}
+			})
 		}
 		
 	};
