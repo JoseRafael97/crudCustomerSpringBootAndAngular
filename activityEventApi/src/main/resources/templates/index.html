@@ -23,10 +23,11 @@
 <script src="/vendors/angular/angular-messages.min.js"></script>
 
 <script src="/js/app.js"></script>
-<script src="/js/services/customerController.js"></script>
+<script src="/js/controllers/customerController.js"></script>
 <script src="/js/services/customerAPIService.js"></script>
 <script src="/js/value/configValue.js"></script>
 <script src="/js/filters/nameFilter.js"></script>
+<script src="/directives/sgest-datedirective.js"></script>
 
 </head>
 
@@ -98,9 +99,9 @@
 			</div>
 
 			<div class="form-group row">
-				<input type="text" name="dateOfBirth"
+				<input type="text" name="date"
 					placeholder="Data de Nascimento" class="form-control"
-					ng-model="customer.dateOfBirth" ng-required="true" />
+					ng-model="customer.dateOfBirth" ng-required="true"  ui-date="" />
 			</div>
 
 			<div class="form-group row">
