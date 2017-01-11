@@ -8,9 +8,22 @@ angular.module("crudCustomer").config(function($routeProvider,$locationProvider)
 	$routeProvider.when("/customers", {
 		templateUrl : 'view/cutomers.html',
 		controller : "customerController",
+		/*resolve: {
+			customers: function(customersAPI) {
+				return customersAPI.getCustomers();
+			}
+		}*/
+	
 	}).when("/newcustomer", {
 		templateUrl : 'view/newCustomer.html',
-		controller : "customerController"
+		controller : "newCustomerController"
+	
+	}).when("/customerdetail/:id", {
+		templateUrl : 'view/cutomers.html',
+		controller : "customerDetailController"
+	
+	}).otherwise({
+		redirectTo : '/customers'
 	});
 	
 	

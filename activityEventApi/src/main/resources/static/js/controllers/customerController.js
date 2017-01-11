@@ -1,6 +1,5 @@
 angular.module("crudCustomer").controller(
-		"customerController",
-		function($scope, $http, customersAPI) {
+		"customerController",function($scope, $http, customersAPI) {
 
 			$scope.app = "List of Customers"
 
@@ -9,13 +8,12 @@ angular.module("crudCustomer").controller(
 			$scope.loadingCustomers = function() {
 				customersAPI.getCustomers().then(function onSuccess(response) {
 					$scope.customers = response.data;
-					console.log($scope.customer)
 
 				}, function onError(response) {
 
 				});
 
-			}
+			} 
 
 			$scope.loadingCustomers();
 

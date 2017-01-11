@@ -46,7 +46,7 @@
 
 				<td><input type="checkbox" ng-model="customer.selected" /></td>
 				<td>{{customer.id}}</td>
-				<td>{{customer.name | name}}</td>
+				<td><a href="/customerdetail/{{customer.id}}">{{customer.name | name}}</a></td>
 				<td>{{customer.cpf }}</td>
 				<td>{{customer.dateOfBirth | date:'dd/MM/yyyy'}}</td>
 				<td>{{customer.email | lowercase}}</td>
