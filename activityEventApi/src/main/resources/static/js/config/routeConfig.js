@@ -16,10 +16,10 @@ angular.module("crudCustomer").config(function($routeProvider,$locationProvider)
 	
 	}).when("/newcustomer", {
 		templateUrl : 'view/newCustomer.html',
-		controller : "newCustomerController"
+		controller : "newCustomerController",
 	
 	}).when("/customerdetail/:id", {
-		templateUrl : 'view/cutomers.html',
+		templateUrl : 'view/customerDetail.html',
 		controller : "customerDetailController"
 	
 	}).otherwise({
