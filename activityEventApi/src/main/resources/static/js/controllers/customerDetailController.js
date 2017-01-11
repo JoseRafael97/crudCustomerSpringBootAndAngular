@@ -1,5 +1,6 @@
-angular.module("crudCustomer").controller("customerDetailController",function($scope, $routeParams) {
+angular.module("crudCustomer").controller("customerDetailController",function($scope, $routeParams, customer) {
 
-	console.log($routeParams.id);
+	$scope.customer = customer.data;
+
 			
 });

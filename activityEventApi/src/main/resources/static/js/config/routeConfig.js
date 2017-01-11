@@ -1,8 +1,16 @@
 angular.module("crudCustomer").config(function($routeProvider,$locationProvider) {
 	
-	$locationProvider.html5Mode({
-		  enabled: true,
-		  requireBase: false
+	
+	
+	$routeProvider.when("/customerdetail/:id", {
+		templateUrl : 'view/customerDetail.html',
+		controller : "customerDetailController",
+		resolve: {
+			customer: function(customersAPI, $route) {
+				return customersAPI.getCustomer($route.current.params.id);
+		}
+	}
+	
 	});
 	
 	$routeProvider.when("/customers", {
@@ -18,13 +26,11 @@ angular.module("crudCustomer").config(function($routeProvider,$locationProvider)
 		templateUrl : 'view/newCustomer.html',
 		controller : "newCustomerController",
 	
-	}).when("/customerdetail/:id", {
-		templateUrl : 'view/customerDetail.html',
-		controller : "customerDetailController"
-	
 	}).otherwise({
 		redirectTo : '/customers'
 	});
+	
+	
 	
 	
 });

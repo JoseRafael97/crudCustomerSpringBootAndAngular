@@ -4,6 +4,10 @@ angular.module("crudCustomer").factory("customersAPI", function($http, config){
 		return $http({method: "GET", url:config.baseUrl+"/customer"});
 	}
 	
+	var _getCustomer =  function(id){
+		return $http({method: "GET", url:config.baseUrl+"/customer/"+id});
+	}
+	
 	var _createCustomer =  function(customer){
 		return $http.post(config.baseUrl+ "/customer", customer);
 	}
@@ -17,8 +21,10 @@ angular.module("crudCustomer").factory("customersAPI", function($http, config){
 	
 	return {
 		getCustomers : _getCustomers,
+		getCustomer : _getCustomer,
 		createCustomer : _createCustomer,
 		deleteCustomer :_deleteCustomer
+		
 
 	};
 });

@@ -10,7 +10,7 @@ public class RouteController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping("/*")
+	@RequestMapping("/")
 	public String loadIndex(){
 		return "index";
 		
