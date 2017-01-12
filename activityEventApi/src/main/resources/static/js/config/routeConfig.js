@@ -26,6 +26,9 @@ angular.module("crudCustomer").config(function($routeProvider,$locationProvider)
 		templateUrl : 'view/newCustomer.html',
 		controller : "newCustomerController",
 	
+	}).when("/newcustomer", {
+		templateUrl : 'view/error.html',
+	
 	}).otherwise({
 		redirectTo : '/customers'
 	});

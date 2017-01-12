@@ -1,4 +1,4 @@
-angular.module("crudCustomer").factory("timestampinteceptor", function() {
+angular.module("crudCustomer").factory("timestampinterceptor", function() {
 	return{
 		request: function (config){
 			var url = config.url;
