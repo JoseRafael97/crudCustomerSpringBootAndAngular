@@ -13,10 +13,13 @@
 <title>Customer</title>
 
 <!-- Bootstrap Core CSS -->
-<link href="/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
 <link rel="stylesheet" type="text/css"
-	href="/vendors/font-awesome-4.7.0/css/font-awesome.min.css" />
+	href="/vendor/font-awesome-4.7.0/css/font-awesome.min.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="/vendor/datatable/css/angular-datatables.min.css" />
 
 
 <link rel="stylesheet" type="text/css" href="/css/app.css" />
@@ -32,33 +35,29 @@
 		<div ng-view="content"></div>
 	</div>
 
-
-	<script src="/vendors/angular/angular.min.js"></script>
-	<script src="/vendors/angular/angular-messages.min.js"></script>
-	<script src="/vendors/angular/angular-route.min.js"></script>
-
+	<script src="/vendor/jquery/jquery-3.1.1.min.js"></script>
+	<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/vendor/datatable/jquery-datatables.min.js"></script>
+	<script src="/vendor/angular/angular.min.js"></script>
+	<script src="/vendor/datatable/angular-datatables.min.js"></script>
+	<script src="/vendor/angular/angular-messages.min.js"></script>
+	<script src="/vendor/angular/angular-route.min.js"></script>
 	<script src="/js/app.js"></script>
 	<script src="/js/config/routeConfig.js"></script>
 	<script src="/js/controllers/customerController.js"></script>
 	<script src="/js/controllers/newCustomerController.js"></script>
 	<script src="/js/controllers/customerDetailController.js"></script>
-	
 	<script src="/js/services/customerAPIService.js"></script>
 	<script src="/js/value/configValue.js"></script>
 	<script src="/js/filters/nameFilter.js"></script>
 	<script src="/js/directives/sgest-datedirective.js"></script>
 	<script src="/js/directives/sgest-phonedirective.js"></script>
 	<script src="/js/directives/sgest-cpfdirective.js"></script>
-
 	<script src="/js/interceptors/timeStampInterceptor.js"></script>
 	<script src="/js/config/interceptorConfig.js"></script>
 	<script src="/js/interceptors/errorInterceptor.js"></script>
 
-	<!-- jQuery Version 1.11.1 -->
-	<script src="/vendors/jquery/jquery-3.1.1.min.js"></script>
 
-	<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-	<!-- Bootstrap Core JavaScript -->
-	<script src="/vendors/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

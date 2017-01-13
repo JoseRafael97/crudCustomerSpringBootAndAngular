@@ -26,7 +26,7 @@ angular.module("crudCustomer").config(function($routeProvider,$locationProvider)
 		templateUrl : 'view/newCustomer.html',
 		controller : "newCustomerController",
 	
-	}).when("/newcustomer", {
+	}).when("/error", {
 		templateUrl : 'view/error.html',
 	
 	}).otherwise({
