@@ -13,15 +13,14 @@
 <title>Customer</title>
 
 <!-- Bootstrap Core CSS -->
-<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
 <link rel="stylesheet" type="text/css"
-	href="/vendor/font-awesome-4.7.0/css/font-awesome.min.css" />
+	href="/vendors/font-awesome-4.7.0/css/font-awesome.min.css" />
 
-<link rel="stylesheet" type="text/css"
-	href="/vendor/datatable/css/angular-datatables.min.css" />
-
-
+<link rel="stylesheet" type="text/css" href="/vendors/jquery-datatables/media/css/dataTables.bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/vendors/angular-datatable/css/angular-datatables.css" />
+	<link rel="stylesheet" type="text/css" href="/vendors/angular-datatable/plugins/bootstrap/datatables.bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/app.css" />
 
 
@@ -35,14 +34,17 @@
 		<div ng-view="content"></div>
 	</div>
 
-	<script src="/vendor/jquery/jquery-3.1.1.min.js"></script>
+	<script src="/vendors/jquery/jquery-3.1.1.min.js"></script>
+	<script src="/vendors/jquery-datatables/media/js/jquery.dataTables.min.js"></script>
 	<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="/vendor/datatable/jquery-datatables.min.js"></script>
-	<script src="/vendor/angular/angular.min.js"></script>
-	<script src="/vendor/datatable/angular-datatables.min.js"></script>
-	<script src="/vendor/angular/angular-messages.min.js"></script>
-	<script src="/vendor/angular/angular-route.min.js"></script>
+	<script src="/vendors/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/vendors/angular/angular.min.js"></script>
+	
+	<script src="/vendors/angular-datatable/angular-datatables.min.js"></script>
+	<script src="/vendors/angular-datatable/plugins/bootstrap/angular-datatables.bootstrap.min.js"></script>
+	
+	<script src="/vendors/angular/angular-messages.min.js"></script>
+	<script src="/vendors/angular/angular-route.min.js"></script>
 	<script src="/js/app.js"></script>
 	<script src="/js/config/routeConfig.js"></script>
 	<script src="/js/controllers/customerController.js"></script>
