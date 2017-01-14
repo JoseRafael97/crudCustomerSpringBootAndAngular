@@ -1,2 +1,2 @@
-angular.module("crudCustomer", ["datatables","ngMessages", "ngRoute"]);
+angular.module("crudCustomer", ["datatables","ngMessages", "ngRoute",'datatables.bootstrap']);
 

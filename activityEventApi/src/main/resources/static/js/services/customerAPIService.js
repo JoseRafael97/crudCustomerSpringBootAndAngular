@@ -1,7 +1,7 @@
 angular.module("crudCustomer").factory("customersAPI", function($http, config){
 	
 	var _getCustomers =  function(){
-		return $http({method: "GET", url:config.baseUrl+"/customer"});
+		return $http.get(config.baseUrl+"/customer");
 	}
 	
 	var _getCustomer =  function(id){
